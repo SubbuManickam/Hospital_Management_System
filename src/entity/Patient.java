@@ -1,0 +1,50 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package entity;
+
+/**
+ *
+ * @author Asus
+ */
+public class Patient {
+    
+    int patientId;
+    Person person;
+    String bloodGroup;
+    EncouterHistory encounterHitory;
+
+    public int getPatientId() {
+        return patientId;
+    }
+
+    public void setPatientId(int patientId) {
+        this.patientId = patientId;
+    }
+
+    public Person getPerson() {
+        return person;
+    }
+
+    public void setPerson(Person person) {
+        this.person = person;
+    }
+
+    public String getBloodGroup() {
+        return bloodGroup;
+    }
+
+    public void setBloodGroup(String bloodGroup) {
+        this.bloodGroup = bloodGroup;
+    }
+
+    public EncouterHistory getEncounterHitory() {
+        return encounterHitory;
+    }
+
+    public void setEncounterHitory(EncouterHistory encounterHitory) {
+        this.encounterHitory = encounterHitory;
+    }
+
+}
