@@ -4,7 +4,7 @@
  */
 package entity;
 
-import java.util.List;
+import java.util.ArrayList;
 
 /**
  *
@@ -13,7 +13,7 @@ import java.util.List;
 public class City {
     
     int cityId;
-    List<Community> communityList;
+    ArrayList<Community> communityList;
     HospitalDirectory hospitalDirectory;
     String state;
     AdminSystem adminSystem;
@@ -26,11 +26,11 @@ public class City {
         this.cityId = cityId;
     }
 
-    public List<Community> getCommunityList() {
+    public ArrayList<Community> getCommunityList() {
         return communityList;
     }
 
-    public void setCommunityList(List<Community> communityList) {
+    public void setCommunityList(ArrayList<Community> communityList) {
         this.communityList = communityList;
     }
 

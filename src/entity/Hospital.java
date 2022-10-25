@@ -12,7 +12,6 @@ public class Hospital {
     
     int hospitalId;
     String hospitalName;
-    Community community;
     HospitalDirectory hospitalDirectory;
 
     public int getHospitalId() {
@@ -29,14 +28,6 @@ public class Hospital {
 
     public void setHospitalName(String hospitalName) {
         this.hospitalName = hospitalName;
-    }
-
-    public Community getCommunity() {
-        return community;
-    }
-
-    public void setCommunity(Community community) {
-        this.community = community;
     }
 
     public HospitalDirectory getHospitalDirectory() {

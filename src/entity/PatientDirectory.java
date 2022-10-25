@@ -4,7 +4,7 @@
  */
 package entity;
 
-import java.util.List;
+import java.util.ArrayList;
 
 /**
  *
@@ -12,23 +12,33 @@ import java.util.List;
  */
 public class PatientDirectory {
     
-    List<Patient> patientList;
-    AdminSystem adminSystem;
-
-    public List<Patient> getPatientList() {
+    ArrayList<Patient> patientList;
+    
+    public ArrayList<Patient> getPatientList() {
         return patientList;
     }
 
-    public void setPatientList(List<Patient> patientList) {
+    public void setPatientList(ArrayList<Patient> patientList) {
         this.patientList = patientList;
     }
-
-    public AdminSystem getAdminSystem() {
-        return adminSystem;
+    
+    public PatientDirectory() {
+        this.patientList = new ArrayList<Patient>();
     }
-
-    public void setAdminSystem(AdminSystem adminSystem) {
-        this.adminSystem = adminSystem;
+  
+    public Patient addData() {
+        Patient patient = new Patient();
+        patientList.add(patient);
+        return patient;
     }
     
+    public Patient viewData(int uniqueId) {
+        
+        for(Patient patient : patientList) {
+            if(patient.getPatientId() == uniqueId) {
+                return patient;
+            }
+        }
+        return null;
+    }
 }

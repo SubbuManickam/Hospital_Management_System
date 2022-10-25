@@ -4,7 +4,7 @@
  */
 package entity;
 
-import java.util.List;
+import java.util.ArrayList;
 
 /**
  *
@@ -12,14 +12,14 @@ import java.util.List;
  */
 public class DoctorDirectory {
     
-    List<Doctor> doctorList;
+    ArrayList<Doctor> doctorList;
     Hospital hospital;
 
-    public List<Doctor> getDoctorList() {
+    public ArrayList<Doctor> getDoctorList() {
         return doctorList;
     }
 
-    public void setDoctorList(List<Doctor> doctorList) {
+    public void setDoctorList(ArrayList<Doctor> doctorList) {
         this.doctorList = doctorList;
     }
 

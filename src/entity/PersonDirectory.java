@@ -4,7 +4,7 @@
  */
 package entity;
 
-import java.util.List;
+import java.util.ArrayList;
 
 /**
  *
@@ -12,23 +12,14 @@ import java.util.List;
  */
 public class PersonDirectory {
     
-    List<Person> personList;
-    AdminSystem adminSystem;
+    ArrayList<Person> personList;
 
-    public List<Person> getPersonList() {
+    public ArrayList<Person> getPersonList() {
         return personList;
     }
 
-    public void setPersonList(List<Person> personList) {
+    public void setPersonList(ArrayList<Person> personList) {
         this.personList = personList;
-    }
-
-    public AdminSystem getAdminSystem() {
-        return adminSystem;
-    }
-
-    public void setAdminSystem(AdminSystem adminSystem) {
-        this.adminSystem = adminSystem;
     }
     
 }

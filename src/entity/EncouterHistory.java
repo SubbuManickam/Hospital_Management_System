@@ -4,7 +4,7 @@
  */
 package entity;
 
-import java.util.List;
+import java.util.ArrayList;
 
 /**
  *
@@ -13,7 +13,7 @@ import java.util.List;
 public class EncouterHistory {
     
     Patient patient;
-    List<Encounter> encounterList;
+    ArrayList<Encounter> encounterList;
 
     public Patient getPatient() {
         return patient;
@@ -23,11 +23,11 @@ public class EncouterHistory {
         this.patient = patient;
     }
 
-    public List<Encounter> getEncounterList() {
+    public ArrayList<Encounter> getEncounterList() {
         return encounterList;
     }
 
-    public void setEncounterList(List<Encounter> encounterList) {
+    public void setEncounterList(ArrayList<Encounter> encounterList) {
         this.encounterList = encounterList;
     }
     
