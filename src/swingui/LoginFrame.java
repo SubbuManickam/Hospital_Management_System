@@ -4,6 +4,7 @@
  */
 package swingui;
 
+import entity.AdminSystem;
 import entity.PatientDirectory;
 
 /**
@@ -16,8 +17,14 @@ public class LoginFrame extends javax.swing.JFrame {
      * Creates new form LoginFrame
      */
     
+    AdminSystem adminSystem;
+    PatientDirectory patientDirectory;
+    
     public LoginFrame() {
         initComponents();
+        
+        adminSystem = new AdminSystem();
+        patientDirectory = new PatientDirectory();
     }
 
     /**
@@ -139,12 +146,13 @@ public class LoginFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        PatientPanel patientPanel = new PatientPanel();
+        PatientPanel patientPanel = new PatientPanel(patientDirectory);
         jSplitPane1.setRightComponent(patientPanel);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        SystemAdminPanel systemAdminPanel = new SystemAdminPanel(adminSystem);
+        jSplitPane1.setRightComponent(systemAdminPanel);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

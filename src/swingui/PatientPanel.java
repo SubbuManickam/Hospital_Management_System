@@ -16,11 +16,11 @@ public class PatientPanel extends javax.swing.JPanel {
      * Creates new form PatientPanel
      */
     
-    PatientDirectory patientDirectoy;
+    PatientDirectory patientDirectory;
     
-    public PatientPanel() {
+    public PatientPanel(PatientDirectory patientDirectory) {
         initComponents();
-        patientDirectoy = new PatientDirectory();
+        this.patientDirectory = patientDirectory;
     }
 
     /**
@@ -103,12 +103,12 @@ public class PatientPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        NewUserPanel newUser = new NewUserPanel(patientDirectoy);
+        NewUserPanel newUser = new NewUserPanel(patientDirectory);
         jSplitPane1.setRightComponent(newUser);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        ExistingUserPanel existingUser = new ExistingUserPanel(patientDirectoy);
+        ExistingUserPanel existingUser = new ExistingUserPanel(patientDirectory);
         jSplitPane1.setRightComponent(existingUser);
     }//GEN-LAST:event_jButton2ActionPerformed
 

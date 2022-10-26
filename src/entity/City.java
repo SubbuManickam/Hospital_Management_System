@@ -13,10 +13,10 @@ import java.util.ArrayList;
 public class City {
     
     int cityId;
+    String cityName;
     ArrayList<Community> communityList;
     HospitalDirectory hospitalDirectory;
     String state;
-    AdminSystem adminSystem;
 
     public int getCityId() {
         return cityId;
@@ -24,6 +24,14 @@ public class City {
 
     public void setCityId(int cityId) {
         this.cityId = cityId;
+    }
+
+    public String getCityName() {
+        return cityName;
+    }
+
+    public void setCityName(String cityName) {
+        this.cityName = cityName;
     }
 
     public ArrayList<Community> getCommunityList() {
@@ -49,12 +57,19 @@ public class City {
     public void setState(String state) {
         this.state = state;
     }
-
-    public AdminSystem getAdminSystem() {
-        return adminSystem;
+    
+    @Override
+    public String toString() {
+        return cityName;
     }
-
-    public void setAdminSystem(AdminSystem adminSystem) {
-        this.adminSystem = adminSystem;
+    
+    public City() {
+        this.communityList = new ArrayList<Community>();
+    }
+    
+    public Community addCommunity() {
+        Community community = new Community();
+        communityList.add(community);
+        return community;
     }
 }

@@ -15,6 +15,7 @@ public class AdminSystem {
     DoctorDirectory doctorDirectory;
     PatientDirectory patientDirectory;
     PersonDirectory personDirectory;
+    HospitalDirectory hospitalDirectory;
     ArrayList<City> cityList;
 
     public DoctorDirectory getDoctorDirectory() {
@@ -49,5 +50,41 @@ public class AdminSystem {
         this.cityList = cityList;
     }
 
- 
+    public HospitalDirectory getHospitalDirectory() {
+        return hospitalDirectory;
+    }
+
+    public void setHospitalDirectory(HospitalDirectory hospitalDirectory) {
+        this.hospitalDirectory = hospitalDirectory;
+    }
+
+    public void addCity(City city) {
+        cityList.add(city);
+    }
+
+    public AdminSystem() {
+        this.cityList = new ArrayList<City>();
+    }
+
+    public void deleteCity(City city) {
+        cityList.remove(city);
+    }
+    
+    public void updateCity(City city) {
+        City newCity = new City();
+        
+        int position = 0;
+        for (int iter = 0; iter < cityList.size(); iter++) {
+            if((cityList.get(iter).getCityId()) == (city.getCityId())) {
+                position = iter;
+                break;
+            }
+        }
+        
+        newCity.setCityId(city.getCityId());
+        newCity.setCityName(city.getCityName());
+        newCity.setState(city.getState());
+        
+        cityList.set(position, newCity);
+    }
 }

@@ -16,6 +16,15 @@ public class Community {
     String communityName;
     ArrayList<House> houseList;
     HospitalDirectory hospitalDirectory;
+    City city;
+
+    public City getCity() {
+        return city;
+    }
+
+    public void setCity(City city) {
+        this.city = city;
+    }
 
     public int getCommunityId() {
         return communityId;

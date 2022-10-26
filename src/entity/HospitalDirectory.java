@@ -13,16 +13,7 @@ import java.util.ArrayList;
 public class HospitalDirectory {
     
     ArrayList<Hospital> hospitalList;
-    Community community;
-
-    public Community getCommunity() {
-        return community;
-    }
-
-    public void setCommunity(Community community) {
-        this.community = community;
-    }
-
+    
     public ArrayList<Hospital> getHospitalList() {
         return hospitalList;
     }
