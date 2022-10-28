@@ -12,7 +12,8 @@ public class Hospital {
     
     int hospitalId;
     String hospitalName;
-    HospitalDirectory hospitalDirectory;
+    String address;
+    DoctorDirectory doctorDirectory;
     Community community;
     
     public int getHospitalId() {
@@ -27,16 +28,24 @@ public class Hospital {
         return hospitalName;
     }
 
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+    
     public void setHospitalName(String hospitalName) {
         this.hospitalName = hospitalName;
     }
 
-    public HospitalDirectory getHospitalDirectory() {
-        return hospitalDirectory;
+    public DoctorDirectory getDoctorDirectory() {
+        return doctorDirectory;
     }
 
-    public void setHospitalDirectory(HospitalDirectory hospitalDirectory) {
-        this.hospitalDirectory = hospitalDirectory;
+    public void setDoctorDirectory(DoctorDirectory doctorDirectory) {
+        this.doctorDirectory = doctorDirectory;
     }
 
     public Community getCommunity() {
@@ -47,4 +56,8 @@ public class Hospital {
         this.community = community;
     }
     
+    @Override
+    public String toString() {
+        return hospitalName;
+    }
 }

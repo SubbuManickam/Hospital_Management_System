@@ -58,4 +58,8 @@ public class Community {
         this.hospitalDirectory = hospitalDirectory;
     }
     
+    @Override
+    public String toString() {
+        return communityName;
+    }
 }

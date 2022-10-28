@@ -4,8 +4,6 @@
  */
 package entity;
 
-import java.util.ArrayList;
-
 /**
  *
  * @author Asus
@@ -16,7 +14,7 @@ public class AdminSystem {
     PatientDirectory patientDirectory;
     PersonDirectory personDirectory;
     HospitalDirectory hospitalDirectory;
-    ArrayList<City> cityList;
+    CityDirectory cityDirectory;
 
     public DoctorDirectory getDoctorDirectory() {
         return doctorDirectory;
@@ -42,12 +40,12 @@ public class AdminSystem {
         this.personDirectory = personDirectory;
     }
 
-    public ArrayList<City> getCityList() {
-        return cityList;
+    public CityDirectory getCityDirectory() {
+        return cityDirectory;
     }
 
-    public void setCityList(ArrayList<City> cityList) {
-        this.cityList = cityList;
+    public void setCityDirectory(CityDirectory cityDirectory) {
+        this.cityDirectory = cityDirectory;
     }
 
     public HospitalDirectory getHospitalDirectory() {
@@ -57,34 +55,5 @@ public class AdminSystem {
     public void setHospitalDirectory(HospitalDirectory hospitalDirectory) {
         this.hospitalDirectory = hospitalDirectory;
     }
-
-    public void addCity(City city) {
-        cityList.add(city);
-    }
-
-    public AdminSystem() {
-        this.cityList = new ArrayList<City>();
-    }
-
-    public void deleteCity(City city) {
-        cityList.remove(city);
-    }
     
-    public void updateCity(City city) {
-        City newCity = new City();
-        
-        int position = 0;
-        for (int iter = 0; iter < cityList.size(); iter++) {
-            if((cityList.get(iter).getCityId()) == (city.getCityId())) {
-                position = iter;
-                break;
-            }
-        }
-        
-        newCity.setCityId(city.getCityId());
-        newCity.setCityName(city.getCityName());
-        newCity.setState(city.getState());
-        
-        cityList.set(position, newCity);
-    }
 }

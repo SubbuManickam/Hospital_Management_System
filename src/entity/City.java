@@ -4,7 +4,6 @@
  */
 package entity;
 
-import java.util.ArrayList;
 
 /**
  *
@@ -14,7 +13,7 @@ public class City {
     
     int cityId;
     String cityName;
-    ArrayList<Community> communityList;
+    CommunityDirectory communityDirectory;
     HospitalDirectory hospitalDirectory;
     String state;
 
@@ -34,12 +33,12 @@ public class City {
         this.cityName = cityName;
     }
 
-    public ArrayList<Community> getCommunityList() {
-        return communityList;
+    public CommunityDirectory getCommunityDirectory() {
+        return communityDirectory;
     }
 
-    public void setCommunityList(ArrayList<Community> communityList) {
-        this.communityList = communityList;
+    public void setCommunityDirectory(CommunityDirectory communityDirectory) {
+        this.communityDirectory = communityDirectory;
     }
 
     public HospitalDirectory getHospitalDirectory() {
@@ -63,13 +62,4 @@ public class City {
         return cityName;
     }
     
-    public City() {
-        this.communityList = new ArrayList<Community>();
-    }
-    
-    public Community addCommunity() {
-        Community community = new Community();
-        communityList.add(community);
-        return community;
-    }
 }

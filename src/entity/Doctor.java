@@ -11,6 +11,7 @@ package entity;
 public class Doctor {
     
     int doctorId;
+    Hospital hospital;
     Person person;
 
     public int getDoctorId() {
@@ -21,6 +22,14 @@ public class Doctor {
         this.doctorId = doctorId;
     }
 
+    public Hospital getHospital() {
+        return hospital;
+    }
+
+    public void setHospital(Hospital hospital) {
+        this.hospital = hospital;
+    }
+
     public Person getPerson() {
         return person;
     }
@@ -29,4 +38,8 @@ public class Doctor {
         this.person = person;
     }
     
+    @Override
+    public String toString() {
+        return person.getName();
+    }
 }

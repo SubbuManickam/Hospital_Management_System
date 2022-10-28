@@ -22,5 +22,34 @@ public class HospitalDirectory {
         this.hospitalList = hospitalList;
     }
 
+    public HospitalDirectory() {
+        this.hospitalList = new ArrayList<Hospital>();
+    }
     
+    public void addHospital(Hospital hospital) {
+        hospitalList.add(hospital);
+    }
+
+    public void deleteHospital(Hospital hospital) {
+        hospitalList.remove(hospital);
+    }
+    
+    public void updateHospital(Hospital hospital) {
+        Hospital newHospital = new Hospital();
+        
+        int position = 0;
+        for (int iter = 0; iter < hospitalList.size(); iter++) {
+            if((hospitalList.get(iter).getHospitalId()) == (hospital.getHospitalId())) {
+                position = iter;
+                break;
+            }
+        }
+        
+        newHospital.setHospitalId(hospital.getHospitalId());
+        newHospital.setHospitalName(hospital.getHospitalName());
+        newHospital.setAddress(hospital.getAddress());
+        newHospital.setCommunity(hospital.getCommunity());
+        
+        hospitalList.set(position, newHospital);
+    }
 }

@@ -30,4 +30,34 @@ public class DoctorDirectory {
     public void setHospital(Hospital hospital) {
         this.hospital = hospital;
     }
+    
+    public DoctorDirectory() {
+        this.doctorList = new ArrayList<Doctor>();
+    }
+    
+    public void addDoctor(Doctor doctor) {
+        doctorList.add(doctor);
+    }
+
+    public void deleteDoctor(Doctor doctor) {
+        doctorList.remove(doctor);
+    }
+    
+    public void updateDoctor(Doctor doctor) {
+        Doctor newDoctor = new Doctor();
+        
+        int position = 0;
+        for (int iter = 0; iter < doctorList.size(); iter++) {
+            if((doctorList.get(iter).getDoctorId()) == (doctor.getDoctorId())) {
+                position = iter;
+                break;
+            }
+        }
+        
+        newDoctor.setDoctorId(doctor.getDoctorId());
+        newDoctor.setPerson(doctor.getPerson());
+        newDoctor.setHospital(doctor.getHospital());
+        
+        doctorList.set(position, newDoctor);
+    }
 }
