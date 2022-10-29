@@ -60,4 +60,15 @@ public class DoctorDirectory {
         
         doctorList.set(position, newDoctor);
     }
+
+    public ArrayList<Doctor> getDoctorsInHospital(int hospitalId) {
+        
+        ArrayList<Doctor> selectedDoctors = new ArrayList<Doctor>();
+        for(Doctor doctor : doctorList) {
+            if(doctor.getHospital().getHospitalId() == hospitalId) {
+                selectedDoctors.add(doctor);
+            }
+        }
+        return(selectedDoctors);
+    }
 }

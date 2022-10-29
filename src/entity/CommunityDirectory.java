@@ -51,4 +51,14 @@ public class CommunityDirectory {
         
         communityList.set(position, newCommunity);
     }
+    
+    public Community communityDetails(int communityId) {
+        
+        for(Community community : communityList) {
+            if(community.getCommunityId() == communityId) {
+                return community;
+            }
+        }
+        return null;
+    }
 }

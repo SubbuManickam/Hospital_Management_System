@@ -46,6 +46,12 @@ public class SystemAdminPanel extends javax.swing.JPanel {
         this.patientDirectory = patientDirectory;
         
         showCityData();
+        setCityData();
+        showCommunityData();
+        setCommunityData();
+        showHospitalData();
+        setHospitalData();
+        showDoctorData();
     }
 
     /**

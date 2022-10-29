@@ -52,4 +52,25 @@ public class HospitalDirectory {
         
         hospitalList.set(position, newHospital);
     }
+    
+    public ArrayList<Hospital> getHospitalsInCommunity(int communityId) {
+        
+        ArrayList<Hospital> selectedHospitals = new ArrayList<Hospital>();
+        for(Hospital hospital : hospitalList) {
+            if(hospital.getCommunity().getCommunityId() == communityId) {
+                selectedHospitals.add(hospital);
+            }
+        }
+        return(selectedHospitals);
+    }
+
+    public Hospital hospitalDetails(int hospitalId) {
+        
+        for(Hospital hospital : hospitalList) {
+            if(hospital.getHospitalId() == hospitalId) {
+                return hospital;
+            }
+        }
+        return null;
+    }
 }

@@ -84,8 +84,18 @@ public class LoginFrame extends javax.swing.JFrame {
         });
 
         jButton4.setText("Hospital Admin");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jButton5.setText("Community Admin");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -167,6 +177,16 @@ public class LoginFrame extends javax.swing.JFrame {
         SystemAdminPanel systemAdminPanel = new SystemAdminPanel(cityDirectory, communityDirectory, hospitalDirectory, doctorDirectory, patientDirectory);
         jSplitPane1.setRightComponent(systemAdminPanel);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        CommunityAdminPanel communityAdminPanel = new CommunityAdminPanel(communityDirectory, hospitalDirectory);
+        jSplitPane1.setRightComponent(communityAdminPanel);
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        HospitalAdminPanel hospitalAdminPanel = new HospitalAdminPanel(hospitalDirectory, doctorDirectory);
+        jSplitPane1.setRightComponent(hospitalAdminPanel);        
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments
