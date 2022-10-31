@@ -5,11 +5,14 @@
 package swingui;
 
 import entity.Community;
+import entity.CommunityDirectory;
 import entity.House;
 import entity.Patient;
 import entity.PatientDirectory;
 import entity.Person;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
+import javax.swing.MutableComboBoxModel;
 
 /**
  *
@@ -20,12 +23,22 @@ public class NewUserPanel extends javax.swing.JPanel {
     /**
      * Creates new form NewUserPanel
      */
-    
     PatientDirectory patientDirectory;
-    
-    public NewUserPanel(PatientDirectory patientDirectory) {
+    CommunityDirectory communityDirectory;
+
+    public NewUserPanel(PatientDirectory patientDirectory, CommunityDirectory communityDirectory) {
         initComponents();
         this.patientDirectory = patientDirectory;
+        this.communityDirectory = communityDirectory;
+
+        MutableComboBoxModel<String> model = new DefaultComboBoxModel<String>();
+
+        for (Community communityList : communityDirectory.getCommunityList()) {
+            String communityData = String.valueOf(communityList.getCommunityId()) + "-" + communityList.getCommunityName();
+            model.addElement(communityData);
+        }
+
+        jComboBox1.setModel(model);
     }
 
     /**
@@ -53,8 +66,8 @@ public class NewUserPanel extends javax.swing.JPanel {
         jTextField5 = new javax.swing.JTextField();
         jTextField6 = new javax.swing.JTextField();
         jTextField7 = new javax.swing.JTextField();
-        jTextField8 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
+        jComboBox1 = new javax.swing.JComboBox<>();
 
         jLabel1.setText("Name:");
 
@@ -112,7 +125,7 @@ public class NewUserPanel extends javax.swing.JPanel {
                             .addComponent(jTextField5)
                             .addComponent(jTextField6)
                             .addComponent(jTextField7)
-                            .addComponent(jTextField8)))
+                            .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -154,7 +167,7 @@ public class NewUserPanel extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(49, 49, 49)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(175, Short.MAX_VALUE))
@@ -162,27 +175,53 @@ public class NewUserPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
-        Patient newPatient = patientDirectory.addData();
-        Person newPerson = new Person();
-        House newHouse = new House();
-        Community newCommunity = new Community();
-        
-        newPatient.setPatientId(Integer.parseInt(jTextField1.getText()));
-        newPatient.setBloodGroup(jTextField5.getText());
-        newPerson.setName(jTextField2.getText());
-        newPerson.setAge(Integer.parseInt(jTextField3.getText()));
-        newPerson.setGender(jTextField4.getText());
-        newPerson.setPosition("Patient");
-        newHouse.setHouseNumber(Integer.parseInt(jTextField6.getText()));
-        newHouse.setAddress(jTextField7.getText());
-        newCommunity.setCommunityName(jTextField8.getText());
-        newHouse.setCommunity(newCommunity);
-        newPerson.setHouse(newHouse);
-        newPatient.setPerson(newPerson);
-        
-        JOptionPane.showMessageDialog(this, "User Details Added");
 
+        try {
+
+            if (jComboBox1.getSelectedItem() != null) {
+                Patient newPatient = new Patient();
+                Person newPerson = new Person();
+                House newHouse = new House();
+
+                String communityData[] = String.valueOf(jComboBox1.getSelectedItem()).split("-");
+                int communityId = Integer.parseInt(communityData[0]);
+                Community communityDetails = communityDirectory.communityDetails(communityId);
+
+                newPatient.setPatientId(Integer.parseInt(jTextField1.getText()));
+                newPatient.setBloodGroup(jTextField5.getText());
+                newPerson.setName(jTextField2.getText());
+                newPerson.setAge(Integer.parseInt(jTextField3.getText()));
+                newPerson.setGender(jTextField4.getText());
+                newPerson.setPosition("Patient");
+                newHouse.setHouseNumber(Integer.parseInt(jTextField6.getText()));
+                newHouse.setAddress(jTextField7.getText());
+                newHouse.setCommunity(communityDetails);
+                newPerson.setHouse(newHouse);
+                newPatient.setPerson(newPerson);
+
+                String validPatient = patientDirectory.patientIdValidation(newPatient);
+                if (validPatient.equals("Valid")) {
+                    patientDirectory.addPatient(newPatient);
+                    JOptionPane.showMessageDialog(this, "User Details Added");
+                } else {
+                    JOptionPane.showMessageDialog(this, validPatient);
+                }
+
+                jTextField1.setText("");
+                jTextField2.setText("");
+                jTextField3.setText("");
+                jTextField4.setText("");
+                jTextField5.setText("");
+                jTextField6.setText("");
+                jTextField7.setText("");
+                jComboBox1.setSelectedIndex(0);
+                
+            } else {
+                JOptionPane.showMessageDialog(this, "Select a valid Community");
+            }
+        } catch (NumberFormatException e) {
+
+            JOptionPane.showMessageDialog(this, "Enter valid inputs");
             jTextField1.setText("");
             jTextField2.setText("");
             jTextField3.setText("");
@@ -190,12 +229,15 @@ public class NewUserPanel extends javax.swing.JPanel {
             jTextField5.setText("");
             jTextField6.setText("");
             jTextField7.setText("");
-            jTextField8.setText("");
+            jComboBox1.setSelectedIndex(0);
+
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -212,6 +254,5 @@ public class NewUserPanel extends javax.swing.JPanel {
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
     // End of variables declaration//GEN-END:variables
 }

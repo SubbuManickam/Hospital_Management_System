@@ -73,4 +73,14 @@ public class HospitalDirectory {
         }
         return null;
     }
+    
+    public String hospitalIdValidation (Hospital hospital) {
+        for(int i=0; i<hospitalList.size(); i++) {
+            if(hospital.getHospitalId() == hospitalList.get(i).getHospitalId()) {
+                return ("Please enter a unique Hospital ID");
+            }
+        }
+        
+        return ("Valid");
+    }
 }

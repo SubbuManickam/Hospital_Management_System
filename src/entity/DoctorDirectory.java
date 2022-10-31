@@ -71,4 +71,24 @@ public class DoctorDirectory {
         }
         return(selectedDoctors);
     }
+    
+    public Doctor viewData(int uniqueId) {
+        
+        for(Doctor doctor : doctorList) {
+            if(doctor.getDoctorId() == uniqueId) {
+                return doctor;
+            }
+        }
+        return null;
+    }
+    
+    public String doctorIdValidation (Doctor doctor) {
+        for(int i=0; i<doctorList.size(); i++) {
+            if(doctor.getDoctorId() == doctorList.get(i).getDoctorId()) {
+                return ("Please enter a unique Doctor ID");
+            }
+        }
+        
+        return ("Valid");
+    }
 }

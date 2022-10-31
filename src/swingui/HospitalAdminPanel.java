@@ -25,19 +25,18 @@ public class HospitalAdminPanel extends javax.swing.JPanel {
     /**
      * Creates new form HospitalAdminPanel
      */
-    
     HospitalDirectory hospitalDirectory;
     DoctorDirectory doctorDirectory;
-    
+
     public HospitalAdminPanel(HospitalDirectory hospitalDirectory, DoctorDirectory doctorDirectory) {
         initComponents();
-        
+
         this.hospitalDirectory = hospitalDirectory;
         this.doctorDirectory = doctorDirectory;
-        
+
         MutableComboBoxModel<String> model = new DefaultComboBoxModel<String>();
 
-        for(Hospital hospitalList : hospitalDirectory.getHospitalList()) {
+        for (Hospital hospitalList : hospitalDirectory.getHospitalList()) {
             model.addElement(String.valueOf(hospitalList.getHospitalId()));
         }
 
@@ -201,9 +200,9 @@ public class HospitalAdminPanel extends javax.swing.JPanel {
                     .addGap(0, 0, Short.MAX_VALUE)))
             .addContainerGap())
         .addGroup(layout.createSequentialGroup()
-            .addGap(435, 435, 435)
+            .addGap(423, 423, 423)
             .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addGap(33, 33, 33)
+            .addGap(30, 30, 30)
             .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
     );
@@ -244,11 +243,11 @@ public class HospitalAdminPanel extends javax.swing.JPanel {
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                 .addComponent(jLabel8)
                 .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+            .addGap(18, 18, 18)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                 .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGap(72, 72, 72))
+            .addContainerGap(78, Short.MAX_VALUE))
     );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -256,7 +255,7 @@ public class HospitalAdminPanel extends javax.swing.JPanel {
 
         int index = jTable1.getSelectedRow();
 
-        if(index < 0) {
+        if (index < 0) {
             JOptionPane.showMessageDialog(this, "Please select a row to be deleted");
             return;
         }
@@ -280,84 +279,114 @@ public class HospitalAdminPanel extends javax.swing.JPanel {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
 
-        Doctor doctor = new Doctor();
-        int hospitalId = Integer.parseInt(String.valueOf(jComboBox1.getSelectedItem()));
-        Hospital hospitalDetails = hospitalDirectory.hospitalDetails(hospitalId);
-        Person personDetails = new Person();
-        
-        doctor.setDoctorId(Integer.parseInt(jTextField4.getText()));
-        personDetails.setName(jTextField5.getText());
-        personDetails.setAge(Integer.parseInt(jTextField6.getText()));
-        personDetails.setGender(jTextField7.getText());
-        personDetails.setPosition("Doctor");
-        doctor.setHospital(hospitalDetails);
-        doctor.setPerson(personDetails);
-        
-        doctorDirectory.addDoctor(doctor);
+        try {
 
-        JOptionPane.showMessageDialog(this, "Doctor Details Added Successfully");
+            Doctor doctor = new Doctor();
+            int hospitalId = Integer.parseInt(String.valueOf(jComboBox1.getSelectedItem()));
+            Hospital hospitalDetails = hospitalDirectory.hospitalDetails(hospitalId);
+            Person personDetails = new Person();
 
-        jTextField4.setText("");
-        jTextField5.setText("");
-        jTextField6.setText("");
-        jTextField7.setText("");
+            doctor.setDoctorId(Integer.parseInt(jTextField4.getText()));
+            personDetails.setName(jTextField5.getText());
+            personDetails.setAge(Integer.parseInt(jTextField6.getText()));
+            personDetails.setGender(jTextField7.getText());
+            personDetails.setPosition("Doctor");
+            doctor.setHospital(hospitalDetails);
+            doctor.setPerson(personDetails);
 
-        showDoctorData();
+            String validDoctor = doctorDirectory.doctorIdValidation(doctor);
+            if (validDoctor.equals("Valid")) {
+                doctorDirectory.addDoctor(doctor);
+                JOptionPane.showMessageDialog(this, "Doctor Details Added Successfully");
+            } else {
+                JOptionPane.showMessageDialog(this, validDoctor);
+            }
+
+            jTextField4.setText("");
+            jTextField5.setText("");
+            jTextField6.setText("");
+            jTextField7.setText("");
+
+            showDoctorData();
+
+        } catch (NumberFormatException e) {
+
+            JOptionPane.showMessageDialog(this, "Enter valid inputs");
+            jTextField4.setText("");
+            jTextField5.setText("");
+            jTextField6.setText("");
+            jTextField7.setText("");
+
+        }
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
 
-        int hospitalId = Integer.parseInt(String.valueOf(jComboBox1.getSelectedItem()));
-        Hospital hospitalDetails = hospitalDirectory.hospitalDetails(hospitalId);
+        if (jComboBox1.getSelectedItem() != null) {
 
-        jTextField1.setText(String.valueOf(hospitalDetails.getHospitalId()));
-        jTextField2.setText(hospitalDetails.getHospitalName());
-        jTextField3.setText(hospitalDetails.getCommunity().getCommunityName());
+            int hospitalId = Integer.parseInt(String.valueOf(jComboBox1.getSelectedItem()));
+            Hospital hospitalDetails = hospitalDirectory.hospitalDetails(hospitalId);
 
-        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-        model.setRowCount(0);
+            jTextField1.setText(String.valueOf(hospitalDetails.getHospitalId()));
+            jTextField2.setText(hospitalDetails.getHospitalName());
+            jTextField3.setText(hospitalDetails.getCommunity().getCommunityName());
+
+            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+            model.setRowCount(0);
+        } else {
+            JOptionPane.showMessageDialog(this, "Choose a valid Hospital ID");
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
 
-        Doctor selectedDoctor = new Doctor();
-        int flag = 0;
-        Person personDetails = new Person();
-        
-        int hospitalId = Integer.parseInt(String.valueOf(jComboBox1.getSelectedItem()));
-        Hospital hospitalDetails = hospitalDirectory.hospitalDetails(hospitalId);
-        int doctorId = Integer.parseInt(jTextField4.getText());
+        try {
+            Doctor selectedDoctor = new Doctor();
+            int flag = 0;
+            Person personDetails = new Person();
 
-        personDetails.setName(jTextField5.getText());
-        personDetails.setAge(Integer.parseInt(jTextField6.getText()));
-        personDetails.setGender(jTextField7.getText());
-        personDetails.setPosition("Doctor");
-        
-        selectedDoctor.setDoctorId(doctorId);
-        selectedDoctor.setHospital(hospitalDetails);
-        selectedDoctor.setPerson(personDetails);
+            int hospitalId = Integer.parseInt(String.valueOf(jComboBox1.getSelectedItem()));
+            Hospital hospitalDetails = hospitalDirectory.hospitalDetails(hospitalId);
+            int doctorId = Integer.parseInt(jTextField4.getText());
 
-        for(Doctor doctor : doctorDirectory.getDoctorList()) {
-            if(doctor.getDoctorId() == doctorId) {
-                flag = 1;
-                break;
+            personDetails.setName(jTextField5.getText());
+            personDetails.setAge(Integer.parseInt(jTextField6.getText()));
+            personDetails.setGender(jTextField7.getText());
+            personDetails.setPosition("Doctor");
+
+            selectedDoctor.setDoctorId(doctorId);
+            selectedDoctor.setHospital(hospitalDetails);
+            selectedDoctor.setPerson(personDetails);
+
+            for (Doctor doctor : doctorDirectory.getDoctorList()) {
+                if (doctor.getDoctorId() == doctorId) {
+                    flag = 1;
+                    break;
+                }
             }
-        }
 
-        if(flag == 1) {
-            doctorDirectory.updateDoctor(selectedDoctor);
-            JOptionPane.showMessageDialog(this, "Doctor record updated successfully");
-        }
-        else {
-            JOptionPane.showMessageDialog(this, "Enter valid Doctor ID for updating");
-        }
+            if (flag == 1) {
+                doctorDirectory.updateDoctor(selectedDoctor);
+                JOptionPane.showMessageDialog(this, "Doctor record updated successfully");
+            } else {
+                JOptionPane.showMessageDialog(this, "Enter valid Doctor ID for updating");
+            }
 
-        jTextField4.setText("");
-        jTextField5.setText("");
-        jTextField6.setText("");
-        jTextField7.setText("");
-        
-        showDoctorData();
+            jTextField4.setText("");
+            jTextField5.setText("");
+            jTextField6.setText("");
+            jTextField7.setText("");
+
+            showDoctorData();
+
+        } catch (NumberFormatException e) {
+
+            JOptionPane.showMessageDialog(this, "Enter valid inputs");
+            jTextField4.setText("");
+            jTextField5.setText("");
+            jTextField6.setText("");
+            jTextField7.setText("");
+        }
     }//GEN-LAST:event_jButton6ActionPerformed
 
 
@@ -388,25 +417,30 @@ public class HospitalAdminPanel extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     private void showDoctorData() {
-        
-        int hospitalId = Integer.parseInt(String.valueOf(jComboBox1.getSelectedItem()));
-        
-        ArrayList<Doctor> doctorDetails = doctorDirectory.getDoctorsInHospital(hospitalId);
-        
-        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-        model.setRowCount(0);
-       
-       if(doctorDetails != null){
-        for(Doctor doctor : doctorDetails) {
-            
-        Object[] newRow = new Object[4];
-           newRow[0] = doctor.getDoctorId();
-           newRow[1] = doctor;
-           newRow[2] = doctor.getPerson().getAge();
-           newRow[3] = doctor.getPerson().getGender();
-           
-           model.addRow(newRow);
-       }
-       }
+
+        if (jComboBox1.getSelectedItem() != null) {
+            int hospitalId = Integer.parseInt(String.valueOf(jComboBox1.getSelectedItem()));
+
+            ArrayList<Doctor> doctorDetails = doctorDirectory.getDoctorsInHospital(hospitalId);
+
+            if (doctorDetails.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "No Doctors under the selected Hospital");
+            } else {
+                DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+                model.setRowCount(0);
+                for (Doctor doctor : doctorDetails) {
+
+                    Object[] newRow = new Object[4];
+                    newRow[0] = doctor.getDoctorId();
+                    newRow[1] = doctor;
+                    newRow[2] = doctor.getPerson().getAge();
+                    newRow[3] = doctor.getPerson().getGender();
+
+                    model.addRow(newRow);
+                }
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Choose a valid Hospital ID");
+        }
     }
 }

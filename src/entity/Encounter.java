@@ -4,7 +4,7 @@
  */
 package entity;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 /**
  *
@@ -14,7 +14,7 @@ public class Encounter {
     
     Doctor doctor;
     Patient patient;
-    Date date;
+    LocalDate date;
     VitalSigns vitalSigns;
 
     public Doctor getDoctor() {
@@ -33,11 +33,11 @@ public class Encounter {
         this.patient = patient;
     }
 
-    public Date getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 
@@ -49,4 +49,8 @@ public class Encounter {
         this.vitalSigns = vitalSigns;
     }
     
+    @Override
+    public String toString() {
+        return patient.getPerson().getName();
+    }
 }

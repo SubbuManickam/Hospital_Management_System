@@ -61,4 +61,14 @@ public class CommunityDirectory {
         }
         return null;
     }
+    
+    public String communityIdValidation (Community community) {
+        for(int i=0; i<communityList.size(); i++) {
+            if(community.getCommunityId() == communityList.get(i).getCommunityId()) {
+                return ("Please enter a unique Community ID");
+            }
+        }
+        
+        return ("Valid");
+    }
 }

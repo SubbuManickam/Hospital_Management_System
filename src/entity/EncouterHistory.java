@@ -12,17 +12,8 @@ import java.util.ArrayList;
  */
 public class EncouterHistory {
     
-    Patient patient;
     ArrayList<Encounter> encounterList;
-
-    public Patient getPatient() {
-        return patient;
-    }
-
-    public void setPatient(Patient patient) {
-        this.patient = patient;
-    }
-
+    
     public ArrayList<Encounter> getEncounterList() {
         return encounterList;
     }
@@ -31,4 +22,22 @@ public class EncouterHistory {
         this.encounterList = encounterList;
     }
     
+    public EncouterHistory() {
+        this.encounterList = new ArrayList<Encounter>();
+    }
+    
+    public ArrayList<Encounter> getEncounterData(int patientId) {
+        ArrayList<Encounter> encounterHistory = new ArrayList<Encounter>();
+        
+        for(Encounter encounter : encounterList) {
+            if(encounter.getPatient().getPatientId() == patientId) {
+                encounterHistory.add(encounter);
+            }
+        }
+        return encounterHistory;
+    }
+    
+    public void addEncounter(Encounter encounter) {
+        encounterList.add(encounter);
+    }
 }

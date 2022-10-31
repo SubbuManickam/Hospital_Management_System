@@ -8,6 +8,7 @@ import entity.AdminSystem;
 import entity.CityDirectory;
 import entity.CommunityDirectory;
 import entity.DoctorDirectory;
+import entity.EncouterHistory;
 import entity.HospitalDirectory;
 import entity.PatientDirectory;
 import entity.PersonDirectory;
@@ -28,6 +29,7 @@ public class LoginFrame extends javax.swing.JFrame {
     HospitalDirectory hospitalDirectory;
     CommunityDirectory communityDirectory;
     CityDirectory cityDirectory;
+    EncouterHistory encouterHistory;
     
     public LoginFrame() {
         initComponents();
@@ -38,6 +40,7 @@ public class LoginFrame extends javax.swing.JFrame {
         hospitalDirectory = new HospitalDirectory();
         communityDirectory = new CommunityDirectory();
         cityDirectory = new CityDirectory();
+        encouterHistory = new EncouterHistory();
     }
 
     /**
@@ -165,11 +168,12 @@ public class LoginFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+        DoctorPanel doctorPanel = new DoctorPanel(patientDirectory, encouterHistory, doctorDirectory);
+        jSplitPane1.setRightComponent(doctorPanel);    
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        PatientPanel patientPanel = new PatientPanel(patientDirectory);
+        PatientPanel patientPanel = new PatientPanel(patientDirectory, communityDirectory, hospitalDirectory, doctorDirectory, encouterHistory);
         jSplitPane1.setRightComponent(patientPanel);
     }//GEN-LAST:event_jButton3ActionPerformed
 

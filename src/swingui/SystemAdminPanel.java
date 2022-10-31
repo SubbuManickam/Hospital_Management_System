@@ -12,6 +12,7 @@ import entity.Doctor;
 import entity.DoctorDirectory;
 import entity.Hospital;
 import entity.HospitalDirectory;
+import entity.Patient;
 import entity.PatientDirectory;
 import entity.Person;
 import javax.swing.DefaultComboBoxModel;
@@ -29,22 +30,21 @@ public class SystemAdminPanel extends javax.swing.JPanel {
     /**
      * Creates new form SystemAdminPanel
      */
-    
     CityDirectory cityDirectory;
     CommunityDirectory communityDirectory;
     HospitalDirectory hospitalDirectory;
     DoctorDirectory doctorDirectory;
     PatientDirectory patientDirectory;
-    
+
     public SystemAdminPanel(CityDirectory cityDirectory, CommunityDirectory communityDirectory, HospitalDirectory hospitalDirectory, DoctorDirectory doctorDirectory, PatientDirectory patientDirectory) {
         initComponents();
-        
+
         this.cityDirectory = cityDirectory;
         this.communityDirectory = communityDirectory;
         this.hospitalDirectory = hospitalDirectory;
         this.doctorDirectory = doctorDirectory;
         this.patientDirectory = patientDirectory;
-        
+
         showCityData();
         setCityData();
         showCommunityData();
@@ -52,6 +52,13 @@ public class SystemAdminPanel extends javax.swing.JPanel {
         showHospitalData();
         setHospitalData();
         showDoctorData();
+        showPatientData();
+
+        jTextField4.setEditable(false);
+        jTextField7.setEditable(false);
+        jTextField11.setEditable(false);
+        jTextField19.setEditable(false);
+
     }
 
     /**
@@ -153,6 +160,10 @@ public class SystemAdminPanel extends javax.swing.JPanel {
         jTextField23 = new javax.swing.JTextField();
         jLabel31 = new javax.swing.JLabel();
         jTextField24 = new javax.swing.JTextField();
+        jPanel5 = new javax.swing.JPanel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        jTable5 = new javax.swing.JTable();
+        jButton17 = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel1.setText("System Admin");
@@ -765,10 +776,58 @@ public class SystemAdminPanel extends javax.swing.JPanel {
                 .addComponent(jComboBox6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGap(18, 18, 18)
             .addComponent(jButton16, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addContainerGap(70, Short.MAX_VALUE))
+            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
     );
 
     jTabbedPane1.addTab("Doctor", jPanel4);
+
+    jTable5.setModel(new javax.swing.table.DefaultTableModel(
+        new Object [][] {
+
+        },
+        new String [] {
+            "Patient ID", "Patient Name", "Age", "Gender", "Address", "Community"
+        }
+    )
+    {
+        public boolean isCellEditable(int row, int column) {
+            return false;
+        }
+    }
+    );
+    jScrollPane5.setViewportView(jTable5);
+
+    jButton17.setText("Delete");
+    jButton17.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            jButton17ActionPerformed(evt);
+        }
+    });
+
+    javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+    jPanel5.setLayout(jPanel5Layout);
+    jPanel5Layout.setHorizontalGroup(
+        jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+            .addContainerGap()
+            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanel5Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jButton17))
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 937, Short.MAX_VALUE))
+            .addContainerGap())
+    );
+    jPanel5Layout.setVerticalGroup(
+        jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGroup(jPanel5Layout.createSequentialGroup()
+            .addGap(64, 64, 64)
+            .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGap(18, 18, 18)
+            .addComponent(jButton17, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addContainerGap(469, Short.MAX_VALUE))
+    );
+
+    jTabbedPane1.addTab("Patient", jPanel5);
 
     javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
     this.setLayout(layout);
@@ -796,10 +855,10 @@ public class SystemAdminPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
-        
+
         int index = jTable3.getSelectedRow();
 
-        if(index < 0) {
+        if (index < 0) {
             JOptionPane.showMessageDialog(this, "Please select a row to be deleted");
             return;
         }
@@ -814,7 +873,7 @@ public class SystemAdminPanel extends javax.swing.JPanel {
 
         showHospitalData();
         setHospitalData();
-        
+
         jTextField11.setText("");
         jTextField14.setText("");
         jTextField16.setText("");
@@ -822,16 +881,16 @@ public class SystemAdminPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton12ActionPerformed
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
-        
+
         int index = jTable3.getSelectedRow();
 
-        if(index < 0) {
+        if (index < 0) {
             JOptionPane.showMessageDialog(this, "Please select a row to be viewed");
             return;
         }
 
         DefaultTableModel model = (DefaultTableModel) jTable3.getModel();
-        
+
         Hospital selectedHospital = (Hospital) model.getValueAt(index, 1);
 
         jTextField11.setText(String.valueOf(selectedHospital.getHospitalId()));
@@ -841,39 +900,65 @@ public class SystemAdminPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton11ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-        
-        Hospital hospital = new Hospital();
-        Community selectedcommunity = new Community();
-        hospital.setHospitalId(Integer.parseInt(jTextField12.getText()));
-        hospital.setHospitalName(jTextField13.getText());
-        hospital.setAddress(jTextField15.getText());
-        String communityName = String.valueOf(jComboBox3.getSelectedItem());
 
-        for(Community community : communityDirectory.getCommunityList()) {
-            if(community.getCommunityName().equals(communityName)) {
-                selectedcommunity = community;
+        try {
+
+            if (jComboBox3.getSelectedItem() != null) {
+                Hospital hospital = new Hospital();
+                Community selectedcommunity = new Community();
+                hospital.setHospitalId(Integer.parseInt(jTextField12.getText()));
+                hospital.setHospitalName(jTextField13.getText());
+                hospital.setAddress(jTextField15.getText());
+                String communityName = String.valueOf(jComboBox3.getSelectedItem());
+
+                for (Community community : communityDirectory.getCommunityList()) {
+                    if (community.getCommunityName().equals(communityName)) {
+                        selectedcommunity = community;
+                    }
+                }
+
+                hospital.setCommunity(selectedcommunity);
+
+                String validHospital = hospitalDirectory.hospitalIdValidation(hospital);
+                if (validHospital.equals("Valid")) {
+                    hospitalDirectory.addHospital(hospital);
+                    JOptionPane.showMessageDialog(this, "Hospital Details Added Successfully");
+                } else {
+                    JOptionPane.showMessageDialog(this, validHospital);
+                }
+
+                jTextField12.setText("");
+                jTextField13.setText("");
+                jTextField15.setText("");
+                jComboBox3.setSelectedIndex(0);
+
+                setHospitalData();
+                showHospitalData();
+
+            } else {
+
+                JOptionPane.showMessageDialog(this, "Select a valid Community");
+                jTextField12.setText("");
+                jTextField13.setText("");
+                jTextField15.setText("");
+                jComboBox3.setSelectedIndex(0);
             }
+        } catch (NumberFormatException e) {
+
+            JOptionPane.showMessageDialog(this, "Enter valid inputs");
+            jTextField12.setText("");
+            jTextField13.setText("");
+            jTextField15.setText("");
+            jComboBox3.setSelectedIndex(0);
+
         }
-
-        hospital.setCommunity(selectedcommunity);
-        hospitalDirectory.addHospital(hospital);
-
-        JOptionPane.showMessageDialog(this, "Hospital Details Added Successfully");
-
-        jTextField12.setText("");
-        jTextField13.setText("");
-        jTextField15.setText("");
-        jComboBox3.setSelectedIndex(0);
-
-        setHospitalData();
-        showHospitalData();
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        
+
         int index = jTable2.getSelectedRow();
 
-        if(index < 0) {
+        if (index < 0) {
             JOptionPane.showMessageDialog(this, "Please select a row to be deleted");
             return;
         }
@@ -888,126 +973,169 @@ public class SystemAdminPanel extends javax.swing.JPanel {
 
         showCommunityData();
         setCommunityData();
-        
+
         jTextField7.setText("");
         jTextField10.setText("");
         jComboBox1.setSelectedIndex(0);
-        
+
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        
+
         int index = jTable2.getSelectedRow();
 
-        if(index < 0) {
+        if (index < 0) {
             JOptionPane.showMessageDialog(this, "Please select a row to be viewed");
             return;
         }
 
         DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
-        
+
         Community selectedCommunity = (Community) model.getValueAt(index, 1);
 
         jTextField7.setText(String.valueOf(selectedCommunity.getCommunityId()));
         jTextField10.setText(selectedCommunity.getCommunityName());
         jComboBox2.setSelectedItem(selectedCommunity.getCity().getCityName());
-        
+
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        
-        Community selectedCommunity = new Community();
-        City selectedCity = new City();
-        selectedCommunity.setCommunityId(Integer.parseInt(jTextField7.getText()));
-        selectedCommunity.setCommunityName(jTextField10.getText());
-        String cityName = String.valueOf(jComboBox2.getSelectedItem());
-         
-        for(City city : cityDirectory.getCityList()) {
-            if(city.getCityName().equals(cityName)) {
-                selectedCity = city;
+
+        try {
+            Community selectedCommunity = new Community();
+            City selectedCity = new City();
+            selectedCommunity.setCommunityId(Integer.parseInt(jTextField7.getText()));
+            selectedCommunity.setCommunityName(jTextField10.getText());
+            String cityName = String.valueOf(jComboBox2.getSelectedItem());
+
+            for (City city : cityDirectory.getCityList()) {
+                if (city.getCityName().equals(cityName)) {
+                    selectedCity = city;
+                }
             }
-        }
 
-        selectedCommunity.setCity(selectedCity);
+            selectedCommunity.setCity(selectedCity);
 
-        communityDirectory.updateCommunity(selectedCommunity);
-        JOptionPane.showMessageDialog(this, "Community record updated successfully");
+            communityDirectory.updateCommunity(selectedCommunity);
+            JOptionPane.showMessageDialog(this, "Community record updated successfully for Community ID " + String.valueOf(selectedCommunity.getCommunityId()));
 
-        for(Hospital affected : hospitalDirectory.getHospitalList()) {
-            if(affected.getCommunity().getCommunityId() == selectedCommunity.getCommunityId()) {
-                affected.setCommunity(selectedCommunity);
+            for (Hospital affected : hospitalDirectory.getHospitalList()) {
+                if (affected.getCommunity().getCommunityId() == selectedCommunity.getCommunityId()) {
+                    affected.setCommunity(selectedCommunity);
+                }
             }
+
+            showCommunityData();
+            setCommunityData();
+            showHospitalData();
+
+            jTextField7.setText("");
+            jTextField10.setText("");
+            jComboBox2.setSelectedIndex(0);
+
+        } catch (NumberFormatException e) {
+
+            JOptionPane.showMessageDialog(this, "Enter valid inputs");
+            jTextField7.setText("");
+            jTextField10.setText("");
+            jComboBox2.setSelectedIndex(0);
+
         }
-        
-        showCommunityData();
-        setCommunityData();
-        showHospitalData();
-        
-        jTextField7.setText("");
-        jTextField10.setText("");
-        jComboBox2.setSelectedIndex(0);
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
 
-        Community community = new Community();
-        City selectedCity = new City();
-        community.setCommunityId(Integer.parseInt(jTextField8.getText()));
-        community.setCommunityName(jTextField9.getText());
-        String cityName = String.valueOf(jComboBox1.getSelectedItem());
+        try {
 
-        for(City city : cityDirectory.getCityList()) {
-            if(city.getCityName().equals(cityName)) {
-                selectedCity = city;
+            if (jComboBox1.getSelectedItem() != null) {
+                Community community = new Community();
+                City selectedCity = new City();
+                community.setCommunityId(Integer.parseInt(jTextField8.getText()));
+                community.setCommunityName(jTextField9.getText());
+                String cityName = String.valueOf(jComboBox1.getSelectedItem());
+
+                for (City city : cityDirectory.getCityList()) {
+                    if (city.getCityName().equals(cityName)) {
+                        selectedCity = city;
+                    }
+                }
+
+                community.setCity(selectedCity);
+
+                String validCommunity = communityDirectory.communityIdValidation(community);
+                if (validCommunity.equals("Valid")) {
+                    communityDirectory.addCommunity(community);
+                    JOptionPane.showMessageDialog(this, "Community Details Added Successfully");
+                } else {
+                    JOptionPane.showMessageDialog(this, validCommunity);
+                }
+
+                jTextField8.setText("");
+                jTextField9.setText("");
+                jComboBox1.setSelectedIndex(0);
+
+                setCommunityData();
+                showCommunityData();
+
+            } else {
+
+                JOptionPane.showMessageDialog(this, "Select a valid City");
+                jTextField8.setText("");
+                jTextField9.setText("");
+                jComboBox1.setSelectedIndex(0);
+
             }
+
+        } catch (NumberFormatException e) {
+
+            JOptionPane.showMessageDialog(this, "Enter valid inputs");
+            jTextField8.setText("");
+            jTextField9.setText("");
+            jComboBox1.setSelectedIndex(0);
+
         }
-
-        community.setCity(selectedCity);
-        communityDirectory.addCommunity(community);
-
-        JOptionPane.showMessageDialog(this, "Community Details Added Successfully");
-
-        jTextField8.setText("");
-        jTextField9.setText("");
-        jComboBox1.setSelectedIndex(0);
-
-        
-        setCommunityData();
-        showCommunityData();
-
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
 
-        City selectedCity = new City();
+        try {
+            City selectedCity = new City();
 
-        selectedCity.setCityId(Integer.parseInt(jTextField4.getText()));
-        selectedCity.setCityName(jTextField5.getText());
-        selectedCity.setState(jTextField6.getText());
+            selectedCity.setCityId(Integer.parseInt(jTextField4.getText()));
+            selectedCity.setCityName(jTextField5.getText());
+            selectedCity.setState(jTextField6.getText());
 
-        cityDirectory.updateCity(selectedCity);
-        JOptionPane.showMessageDialog(this, "City record updated successfully");
+            cityDirectory.updateCity(selectedCity);
+            JOptionPane.showMessageDialog(this, "City record updated successfully for City ID " + String.valueOf(selectedCity.getCityId()));
 
-        for(Community affected : communityDirectory.getCommunityList()) {
-            if(affected.getCity().getCityId() == selectedCity.getCityId()) {
-                affected.setCity(selectedCity);
+            for (Community affected : communityDirectory.getCommunityList()) {
+                if (affected.getCity().getCityId() == selectedCity.getCityId()) {
+                    affected.setCity(selectedCity);
+                }
             }
+
+            showCityData();
+            showCommunityData();
+            setCityData();
+
+            jTextField4.setText("");
+            jTextField5.setText("");
+            jTextField6.setText("");
+
+        } catch (NumberFormatException e) {
+
+            JOptionPane.showMessageDialog(this, "Enter valid inputs");
+            jTextField4.setText("");
+            jTextField5.setText("");
+            jTextField6.setText("");
         }
-        
-        showCityData();
-        showCommunityData();
-        setCityData();
-        
-        jTextField4.setText("");
-        jTextField5.setText("");
-        jTextField6.setText("");
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
 
         int index = jTable1.getSelectedRow();
 
-        if(index < 0) {
+        if (index < 0) {
             JOptionPane.showMessageDialog(this, "Please select a row to be deleted");
             return;
         }
@@ -1022,7 +1150,7 @@ public class SystemAdminPanel extends javax.swing.JPanel {
 
         showCityData();
         setCityData();
-        
+
         jTextField4.setText("");
         jTextField5.setText("");
         jTextField6.setText("");
@@ -1033,7 +1161,7 @@ public class SystemAdminPanel extends javax.swing.JPanel {
 
         int index = jTable1.getSelectedRow();
 
-        if(index < 0) {
+        if (index < 0) {
             JOptionPane.showMessageDialog(this, "Please select a row to be viewed");
             return;
         }
@@ -1050,33 +1178,49 @@ public class SystemAdminPanel extends javax.swing.JPanel {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
         City city = new City();
-        city.setCityId(Integer.parseInt(jTextField1.getText()));
-        city.setCityName(jTextField2.getText());
-        city.setState(jTextField3.getText());
+        try {
 
-        cityDirectory.addCity(city);
+            city.setCityId(Integer.parseInt(jTextField1.getText()));
+            city.setCityName(jTextField2.getText());
+            city.setState(jTextField3.getText());
 
-        JOptionPane.showMessageDialog(this, "City Details Added Successfully");
+            String validCity = cityDirectory.cityIdValidation(city);
+            if (validCity.equals("Valid")) {
+                cityDirectory.addCity(city);
+                JOptionPane.showMessageDialog(this, "City Details Added Successfully");
 
-        jTextField1.setText("");
-        jTextField2.setText("");
-        jTextField3.setText("");
-        
-        setCityData();
-        showCityData();
+            } else {
+                JOptionPane.showMessageDialog(this, validCity);
+            }
+
+            jTextField1.setText("");
+            jTextField2.setText("");
+            jTextField3.setText("");
+
+            setCityData();
+            showCityData();
+
+        } catch (NumberFormatException e) {
+
+            JOptionPane.showMessageDialog(this, "Enter valid inputs");
+            jTextField1.setText("");
+            jTextField2.setText("");
+            jTextField3.setText("");
+        }
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
-        
+
         int index = jTable4.getSelectedRow();
 
-        if(index < 0) {
+        if (index < 0) {
             JOptionPane.showMessageDialog(this, "Please select a row to be viewed");
             return;
         }
 
         DefaultTableModel model = (DefaultTableModel) jTable4.getModel();
-        
+
         Doctor selectedDoctor = (Doctor) model.getValueAt(index, 1);
 
         jTextField19.setText(String.valueOf(selectedDoctor.getDoctorId()));
@@ -1087,10 +1231,10 @@ public class SystemAdminPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton13ActionPerformed
 
     private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
-        
+
         int index = jTable4.getSelectedRow();
 
-        if(index < 0) {
+        if (index < 0) {
             JOptionPane.showMessageDialog(this, "Please select a row to be deleted");
             return;
         }
@@ -1104,119 +1248,188 @@ public class SystemAdminPanel extends javax.swing.JPanel {
         JOptionPane.showMessageDialog(this, "Doctor record deleted");
 
         showDoctorData();
-        
+
         jTextField19.setText("");
         jTextField20.setText("");
         jTextField22.setText("");
         jTextField24.setText("");
         jComboBox6.setSelectedIndex(0);
-        
+
     }//GEN-LAST:event_jButton14ActionPerformed
 
     private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
-        
-        Doctor doctor = new Doctor();
-        Hospital selectedHospital = new Hospital();
-        Person newPerson = new Person();
-        doctor.setDoctorId(Integer.parseInt(jTextField17.getText()));
-        newPerson.setName(jTextField18.getText());
-        newPerson.setAge(Integer.parseInt(jTextField21.getText()));
-        newPerson.setGender(jTextField23.getText());
-        newPerson.setPosition("Doctor");
-   
-        String hospitalName = String.valueOf(jComboBox5.getSelectedItem());
 
-        for(Hospital hospital : hospitalDirectory.getHospitalList()) {
-            if(hospital.getHospitalName().equals(hospitalName)) {
-                selectedHospital = hospital;
+        try {
+
+            if (jComboBox5.getSelectedItem() != null) {
+                Doctor doctor = new Doctor();
+                Hospital selectedHospital = new Hospital();
+                Person newPerson = new Person();
+                doctor.setDoctorId(Integer.parseInt(jTextField17.getText()));
+                newPerson.setName(jTextField18.getText());
+                newPerson.setAge(Integer.parseInt(jTextField21.getText()));
+                newPerson.setGender(jTextField23.getText());
+                newPerson.setPosition("Doctor");
+
+                String hospitalName = String.valueOf(jComboBox5.getSelectedItem());
+
+                for (Hospital hospital : hospitalDirectory.getHospitalList()) {
+                    if (hospital.getHospitalName().equals(hospitalName)) {
+                        selectedHospital = hospital;
+                    }
+                }
+
+                doctor.setHospital(selectedHospital);
+                doctor.setPerson(newPerson);
+
+                String validDoctor = doctorDirectory.doctorIdValidation(doctor);
+                if (validDoctor.equals("Valid")) {
+                    doctorDirectory.addDoctor(doctor);
+                    JOptionPane.showMessageDialog(this, "Doctor Details Added Successfully");
+                } else {
+                    JOptionPane.showMessageDialog(this, validDoctor);
+                }
+
+                jTextField17.setText("");
+                jTextField18.setText("");
+                jTextField21.setText("");
+                jTextField23.setText("");
+                jComboBox5.setSelectedIndex(0);
+
+                showDoctorData();
+
+            } else {
+                
+                JOptionPane.showMessageDialog(this, "Select a valid Hospital");
+                jTextField17.setText("");
+                jTextField18.setText("");
+                jTextField21.setText("");
+                jTextField23.setText("");
+                jComboBox5.setSelectedIndex(0);
             }
+        } catch (NumberFormatException e) {
+
+            JOptionPane.showMessageDialog(this, "Enter valid inputs");
+            jTextField17.setText("");
+            jTextField18.setText("");
+            jTextField21.setText("");
+            jTextField23.setText("");
+            jComboBox5.setSelectedIndex(0);
         }
-
-        doctor.setHospital(selectedHospital);
-        doctor.setPerson(newPerson);
-        doctorDirectory.addDoctor(doctor);
-
-        JOptionPane.showMessageDialog(this, "Doctor Details Added Successfully");
-
-        jTextField17.setText("");
-        jTextField18.setText("");
-        jTextField21.setText("");
-        jTextField23.setText("");
-        jComboBox5.setSelectedIndex(0);
-        
-        showDoctorData();
     }//GEN-LAST:event_jButton15ActionPerformed
 
     private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
-        
-        Doctor selectedDoctor = new Doctor();
-        Person selectedPerson = new Person();
-        Hospital selectedHospital = new Hospital();
-        selectedDoctor.setDoctorId(Integer.parseInt(jTextField19.getText()));
-        
-        selectedPerson.setName(jTextField20.getText());
-        selectedPerson.setAge(Integer.parseInt(jTextField22.getText()));
-        selectedPerson.setGender(jTextField24.getText());        
-        
-        selectedDoctor.setPerson(selectedPerson);
-        
-        String hospitalName = String.valueOf(jComboBox6.getSelectedItem());
 
-        for(Hospital hospital : hospitalDirectory.getHospitalList()) {
-            if(hospital.getHospitalName().equals(hospitalName)) {
-                selectedHospital = hospital;
+        try {
+            Doctor selectedDoctor = new Doctor();
+            Person selectedPerson = new Person();
+            Hospital selectedHospital = new Hospital();
+            selectedDoctor.setDoctorId(Integer.parseInt(jTextField19.getText()));
+
+            selectedPerson.setName(jTextField20.getText());
+            selectedPerson.setAge(Integer.parseInt(jTextField22.getText()));
+            selectedPerson.setGender(jTextField24.getText());
+            selectedPerson.setPosition("Doctor");
+
+            selectedDoctor.setPerson(selectedPerson);
+
+            String hospitalName = String.valueOf(jComboBox6.getSelectedItem());
+
+            for (Hospital hospital : hospitalDirectory.getHospitalList()) {
+                if (hospital.getHospitalName().equals(hospitalName)) {
+                    selectedHospital = hospital;
+                }
             }
-        }
-        
-        selectedDoctor.setHospital(selectedHospital);
-        
-        doctorDirectory.updateDoctor(selectedDoctor);
-        JOptionPane.showMessageDialog(this, "Doctor record updated successfully");
 
-        showDoctorData();
-  
-        jTextField19.setText("");
-        jTextField20.setText("");
-        jTextField22.setText("");
-        jTextField24.setText("");
-        jComboBox6.setSelectedIndex(0);
+            selectedDoctor.setHospital(selectedHospital);
+
+            doctorDirectory.updateDoctor(selectedDoctor);
+            JOptionPane.showMessageDialog(this, "Doctor record updated successfully for Doctor ID " + String.valueOf(selectedDoctor.getDoctorId()));
+
+            showDoctorData();
+
+            jTextField19.setText("");
+            jTextField20.setText("");
+            jTextField22.setText("");
+            jTextField24.setText("");
+            jComboBox6.setSelectedIndex(0);
+
+        } catch (NumberFormatException e) {
+
+            JOptionPane.showMessageDialog(this, "Enter valid inputs");
+            jTextField19.setText("");
+            jTextField20.setText("");
+            jTextField22.setText("");
+            jTextField24.setText("");
+            jComboBox6.setSelectedIndex(0);
+        }
     }//GEN-LAST:event_jButton16ActionPerformed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
 
-        Hospital selectedHospital = new Hospital();
-        Community selectedCommunity = new Community();
-        selectedHospital.setHospitalId(Integer.parseInt(jTextField11.getText()));
-        selectedHospital.setHospitalName(jTextField14.getText());
-        selectedHospital.setAddress(jTextField16.getText());
-        String communityName = String.valueOf(jComboBox4.getSelectedItem());
+        try {
+            Hospital selectedHospital = new Hospital();
+            Community selectedCommunity = new Community();
+            selectedHospital.setHospitalId(Integer.parseInt(jTextField11.getText()));
+            selectedHospital.setHospitalName(jTextField14.getText());
+            selectedHospital.setAddress(jTextField16.getText());
+            String communityName = String.valueOf(jComboBox4.getSelectedItem());
 
-        for(Community community : communityDirectory.getCommunityList()) {
-            if(community.getCommunityName().equals(communityName)) {
-                selectedCommunity = community;
+            for (Community community : communityDirectory.getCommunityList()) {
+                if (community.getCommunityName().equals(communityName)) {
+                    selectedCommunity = community;
+                }
             }
-        }
 
-        selectedHospital.setCommunity(selectedCommunity);
+            selectedHospital.setCommunity(selectedCommunity);
 
-        hospitalDirectory.updateHospital(selectedHospital);
-        JOptionPane.showMessageDialog(this, "Hospital record updated successfully");
+            hospitalDirectory.updateHospital(selectedHospital);
+            JOptionPane.showMessageDialog(this, "Hospital record updated successfully for Hospital ID " + String.valueOf(selectedHospital.getHospitalId()));
 
-        for(Doctor affected : doctorDirectory.getDoctorList()) {
-            if(affected.getHospital().getHospitalId() == selectedHospital.getHospitalId()) {
-                affected.setHospital(selectedHospital);
+            for (Doctor affected : doctorDirectory.getDoctorList()) {
+                if (affected.getHospital().getHospitalId() == selectedHospital.getHospitalId()) {
+                    affected.setHospital(selectedHospital);
+                }
             }
+
+            showHospitalData();
+            setHospitalData();
+            showDoctorData();
+
+            jTextField11.setText("");
+            jTextField14.setText("");
+            jTextField16.setText("");
+            jComboBox4.setSelectedIndex(0);
+
+        } catch (NumberFormatException e) {
+
+            JOptionPane.showMessageDialog(this, "Enter valid inputs");
+            jTextField11.setText("");
+            jTextField14.setText("");
+            jTextField16.setText("");
+            jComboBox4.setSelectedIndex(0);
         }
-
-        showHospitalData();
-        setHospitalData();
-        showDoctorData();
-
-        jTextField11.setText("");
-        jTextField14.setText("");
-        jTextField16.setText("");
-        jComboBox4.setSelectedIndex(0);
     }//GEN-LAST:event_jButton10ActionPerformed
+
+    private void jButton17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton17ActionPerformed
+
+        int index = jTable5.getSelectedRow();
+
+        if (index < 0) {
+            JOptionPane.showMessageDialog(this, "Please select a row to be deleted");
+            return;
+        }
+
+        DefaultTableModel model = (DefaultTableModel) jTable5.getModel();
+
+        Patient selectedPatient = (Patient) model.getValueAt(index, 1);
+
+        patientDirectory.deletePatient(selectedPatient);
+
+        JOptionPane.showMessageDialog(this, "Patient record deleted");
+
+        showPatientData();
+    }//GEN-LAST:event_jButton17ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1228,6 +1441,7 @@ public class SystemAdminPanel extends javax.swing.JPanel {
     private javax.swing.JButton jButton14;
     private javax.swing.JButton jButton15;
     private javax.swing.JButton jButton16;
+    private javax.swing.JButton jButton17;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
@@ -1277,15 +1491,18 @@ public class SystemAdminPanel extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
     private javax.swing.JTable jTable3;
     private javax.swing.JTable jTable4;
+    private javax.swing.JTable jTable5;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField10;
     private javax.swing.JTextField jTextField11;
@@ -1313,45 +1530,45 @@ public class SystemAdminPanel extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     private void showCityData() {
-        
-       DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-       model.setRowCount(0);
-       
-       if(cityDirectory.getCityList() != null){
-       for(City selectedCity : cityDirectory.getCityList()) {
-           
-           Object[] newRow = new Object[3];
-           newRow[0] = selectedCity.getCityId();
-           newRow[1] = selectedCity;
-           newRow[2] = selectedCity.getState();
-           
-           model.addRow(newRow);
-       }
-    }
+
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        model.setRowCount(0);
+
+        if (cityDirectory.getCityList() != null) {
+            for (City selectedCity : cityDirectory.getCityList()) {
+
+                Object[] newRow = new Object[3];
+                newRow[0] = selectedCity.getCityId();
+                newRow[1] = selectedCity;
+                newRow[2] = selectedCity.getState();
+
+                model.addRow(newRow);
+            }
+        }
     }
 
     private void showCommunityData() {
-        
-       DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
-       model.setRowCount(0);
-       
-       if(communityDirectory.getCommunityList() != null){
-       for(Community selectedCommunity : communityDirectory.getCommunityList()) {
-           
-           Object[] newRow = new Object[3];
-           newRow[0] = selectedCommunity.getCommunityId();
-           newRow[1] = selectedCommunity;
-           newRow[2] = selectedCommunity.getCity().getCityName();
-           
-           model.addRow(newRow);
-       }
-    }
+
+        DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
+        model.setRowCount(0);
+
+        if (communityDirectory.getCommunityList() != null) {
+            for (Community selectedCommunity : communityDirectory.getCommunityList()) {
+
+                Object[] newRow = new Object[3];
+                newRow[0] = selectedCommunity.getCommunityId();
+                newRow[1] = selectedCommunity;
+                newRow[2] = selectedCommunity.getCity().getCityName();
+
+                model.addRow(newRow);
+            }
+        }
     }
 
     private void setCityData() {
         MutableComboBoxModel<String> model = new DefaultComboBoxModel<String>();
 
-        for(City cityList : cityDirectory.getCityList()) {
+        for (City cityList : cityDirectory.getCityList()) {
             model.addElement(cityList.getCityName());
         }
 
@@ -1362,7 +1579,7 @@ public class SystemAdminPanel extends javax.swing.JPanel {
     private void setCommunityData() {
         MutableComboBoxModel<String> model = new DefaultComboBoxModel<String>();
 
-        for(Community communityList : communityDirectory.getCommunityList()) {
+        for (Community communityList : communityDirectory.getCommunityList()) {
             model.addElement(communityList.getCommunityName());
         }
 
@@ -1371,10 +1588,10 @@ public class SystemAdminPanel extends javax.swing.JPanel {
     }
 
     private void setHospitalData() {
-        
+
         MutableComboBoxModel<String> model = new DefaultComboBoxModel<String>();
 
-        for(Hospital hospitalList : hospitalDirectory.getHospitalList()) {
+        for (Hospital hospitalList : hospitalDirectory.getHospitalList()) {
             model.addElement(hospitalList.getHospitalName());
         }
 
@@ -1383,41 +1600,62 @@ public class SystemAdminPanel extends javax.swing.JPanel {
     }
 
     private void showHospitalData() {
-        
-       DefaultTableModel model = (DefaultTableModel) jTable3.getModel();
-       model.setRowCount(0);
-       
-       if(hospitalDirectory.getHospitalList() != null){
-       for(Hospital selectedHospital : hospitalDirectory.getHospitalList()) {
-           
-           Object[] newRow = new Object[4];
-           newRow[0] = selectedHospital.getHospitalId();
-           newRow[1] = selectedHospital;
-           newRow[2] = selectedHospital.getAddress();
-           newRow[3] = selectedHospital.getCommunity().getCommunityName();
-           
-           model.addRow(newRow);
-       }
-    }
+
+        DefaultTableModel model = (DefaultTableModel) jTable3.getModel();
+        model.setRowCount(0);
+
+        if (hospitalDirectory.getHospitalList() != null) {
+            for (Hospital selectedHospital : hospitalDirectory.getHospitalList()) {
+
+                Object[] newRow = new Object[4];
+                newRow[0] = selectedHospital.getHospitalId();
+                newRow[1] = selectedHospital;
+                newRow[2] = selectedHospital.getAddress();
+                newRow[3] = selectedHospital.getCommunity().getCommunityName();
+
+                model.addRow(newRow);
+            }
+        }
     }
 
     private void showDoctorData() {
-        
-       DefaultTableModel model = (DefaultTableModel) jTable4.getModel();
-       model.setRowCount(0);
-       
-       if(doctorDirectory.getDoctorList() != null){
-       for(Doctor selectedDoctor : doctorDirectory.getDoctorList()) {
-           
-           Object[] newRow = new Object[5];
-           newRow[0] = selectedDoctor.getDoctorId();
-           newRow[1] = selectedDoctor;
-           newRow[2] = selectedDoctor.getPerson().getAge();
-           newRow[3] = selectedDoctor.getPerson().getGender();
-           newRow[4] = selectedDoctor.getHospital().getHospitalName();
-           
-           model.addRow(newRow);
-       }
+
+        DefaultTableModel model = (DefaultTableModel) jTable4.getModel();
+        model.setRowCount(0);
+
+        if (doctorDirectory.getDoctorList() != null) {
+            for (Doctor selectedDoctor : doctorDirectory.getDoctorList()) {
+
+                Object[] newRow = new Object[5];
+                newRow[0] = selectedDoctor.getDoctorId();
+                newRow[1] = selectedDoctor;
+                newRow[2] = selectedDoctor.getPerson().getAge();
+                newRow[3] = selectedDoctor.getPerson().getGender();
+                newRow[4] = selectedDoctor.getHospital().getHospitalName();
+
+                model.addRow(newRow);
+            }
+        }
     }
+
+    private void showPatientData() {
+
+        DefaultTableModel model = (DefaultTableModel) jTable5.getModel();
+        model.setRowCount(0);
+
+        if (patientDirectory.getPatientList() != null) {
+            for (Patient selectedPatient : patientDirectory.getPatientList()) {
+
+                Object[] newRow = new Object[6];
+                newRow[0] = selectedPatient.getPatientId();
+                newRow[1] = selectedPatient;
+                newRow[2] = selectedPatient.getPerson().getAge();
+                newRow[3] = selectedPatient.getPerson().getGender();
+                newRow[4] = selectedPatient.getPerson().getHouse().getAddress();
+                newRow[5] = selectedPatient.getPerson().getHouse().getCommunity().getCommunityName();
+
+                model.addRow(newRow);
+            }
+        }
     }
 }

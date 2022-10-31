@@ -23,18 +23,17 @@ public class CommunityAdminPanel extends javax.swing.JPanel {
     /**
      * Creates new form CommunityAdminPanel
      */
-    
-    CommunityDirectory communityDirectory; 
+    CommunityDirectory communityDirectory;
     HospitalDirectory hospitalDirectory;
-    
+
     public CommunityAdminPanel(CommunityDirectory communityDirectory, HospitalDirectory hospitalDirectory) {
         initComponents();
         this.communityDirectory = communityDirectory;
         this.hospitalDirectory = hospitalDirectory;
-        
+
         MutableComboBoxModel<String> model = new DefaultComboBoxModel<String>();
 
-        for(Community communityList : communityDirectory.getCommunityList()) {
+        for (Community communityList : communityDirectory.getCommunityList()) {
             model.addElement(String.valueOf(communityList.getCommunityId()));
         }
 
@@ -241,28 +240,33 @@ public class CommunityAdminPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        
-        int communityId = Integer.parseInt(String.valueOf(jComboBox1.getSelectedItem()));
-        Community communityDetails = communityDirectory.communityDetails(communityId);
-        
-        jTextField1.setText(String.valueOf(communityDetails.getCommunityId()));
-        jTextField2.setText(communityDetails.getCommunityName());
-        jTextField3.setText(communityDetails.getCity().getCityName());
-        
-        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-        model.setRowCount(0);
+
+        if (jComboBox1.getSelectedItem() != null) {
+
+            int communityId = Integer.parseInt(String.valueOf(jComboBox1.getSelectedItem()));
+            Community communityDetails = communityDirectory.communityDetails(communityId);
+
+            jTextField1.setText(String.valueOf(communityDetails.getCommunityId()));
+            jTextField2.setText(communityDetails.getCommunityName());
+            jTextField3.setText(communityDetails.getCity().getCityName());
+
+            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+            model.setRowCount(0);
+        } else {
+            JOptionPane.showMessageDialog(this, "Choose a valid Community ID");
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
+
         showHospitalData();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        
+
         int index = jTable1.getSelectedRow();
 
-        if(index < 0) {
+        if (index < 0) {
             JOptionPane.showMessageDialog(this, "Please select a row to be deleted");
             return;
         }
@@ -276,62 +280,86 @@ public class CommunityAdminPanel extends javax.swing.JPanel {
         JOptionPane.showMessageDialog(this, "Hospital record deleted");
 
         showHospitalData();
-        
+
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        
-        Hospital hospital = new Hospital();
-        int communityId = Integer.parseInt(String.valueOf(jComboBox1.getSelectedItem()));
-        Community communityDetails = communityDirectory.communityDetails(communityId);
-        hospital.setHospitalId(Integer.parseInt(jTextField4.getText()));
-        hospital.setHospitalName(jTextField5.getText());
-        hospital.setAddress(jTextField6.getText());
-        hospital.setCommunity(communityDetails);
-        hospitalDirectory.addHospital(hospital);
 
-        JOptionPane.showMessageDialog(this, "Hospital Details Added Successfully");
+        try {
+            Hospital hospital = new Hospital();
+            int communityId = Integer.parseInt(String.valueOf(jComboBox1.getSelectedItem()));
+            Community communityDetails = communityDirectory.communityDetails(communityId);
 
-        jTextField4.setText("");
-        jTextField5.setText("");
-        jTextField6.setText("");
+            hospital.setHospitalId(Integer.parseInt(jTextField4.getText()));
+            hospital.setHospitalName(jTextField5.getText());
+            hospital.setAddress(jTextField6.getText());
+            hospital.setCommunity(communityDetails);
 
-        showHospitalData();
+            String validHospital = hospitalDirectory.hospitalIdValidation(hospital);
+
+            if (validHospital.equals("Valid")) {
+                hospitalDirectory.addHospital(hospital);
+                JOptionPane.showMessageDialog(this, "Hospital Details Added Successfully");
+            } else {
+                JOptionPane.showMessageDialog(this, validHospital);
+            }
+
+            jTextField4.setText("");
+            jTextField5.setText("");
+            jTextField6.setText("");
+
+            showHospitalData();
+
+        } catch (NumberFormatException e) {
+
+            JOptionPane.showMessageDialog(this, "Enter valid inputs");
+            jTextField4.setText("");
+            jTextField5.setText("");
+            jTextField6.setText("");
+        }
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        
-        Hospital selectedHospital = new Hospital();
-        int flag = 0;
 
-        int communityId = Integer.parseInt(String.valueOf(jComboBox1.getSelectedItem()));
-        Community communityDetails = communityDirectory.communityDetails(communityId);
-        int hospitalId = Integer.parseInt(jTextField4.getText());
+        try {
+            Hospital selectedHospital = new Hospital();
+            int flag = 0;
 
-        selectedHospital.setHospitalId(hospitalId);
-        selectedHospital.setHospitalName(jTextField5.getText());
-        selectedHospital.setAddress(jTextField6.getText());
-        selectedHospital.setCommunity(communityDetails);
-        
-        for(Hospital hospital : hospitalDirectory.getHospitalList()) {
-            if(hospital.getHospitalId() == hospitalId) {
-                flag = 1;
-                break;
+            int communityId = Integer.parseInt(String.valueOf(jComboBox1.getSelectedItem()));
+            Community communityDetails = communityDirectory.communityDetails(communityId);
+            int hospitalId = Integer.parseInt(jTextField4.getText());
+
+            selectedHospital.setHospitalId(hospitalId);
+            selectedHospital.setHospitalName(jTextField5.getText());
+            selectedHospital.setAddress(jTextField6.getText());
+            selectedHospital.setCommunity(communityDetails);
+
+            for (Hospital hospital : hospitalDirectory.getHospitalList()) {
+                if (hospital.getHospitalId() == hospitalId) {
+                    flag = 1;
+                    break;
+                }
             }
+
+            if (flag == 1) {
+                hospitalDirectory.updateHospital(selectedHospital);
+                JOptionPane.showMessageDialog(this, "Hospital record updated successfully");
+            } else {
+                JOptionPane.showMessageDialog(this, "Enter an existing Hospital ID for updating");
+            }
+
+            jTextField4.setText("");
+            jTextField5.setText("");
+            jTextField6.setText("");
+            showHospitalData();
+            
+        } catch (NumberFormatException e) {
+            
+            JOptionPane.showMessageDialog(this, "Enter valid inputs");
+            jTextField4.setText("");
+            jTextField5.setText("");
+            jTextField6.setText("");
         }
-        
-        if(flag == 1) {
-            hospitalDirectory.updateHospital(selectedHospital);
-            JOptionPane.showMessageDialog(this, "Hospital record updated successfully");
-        }
-        else {
-            JOptionPane.showMessageDialog(this, "Enter valid Hospital ID for updating");
-        }
-        
-        jTextField4.setText("");
-        jTextField5.setText("");
-        jTextField6.setText("");
-        showHospitalData();
     }//GEN-LAST:event_jButton6ActionPerformed
 
 
@@ -360,24 +388,30 @@ public class CommunityAdminPanel extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     private void showHospitalData() {
-    
-        int communityId = Integer.parseInt(String.valueOf(jComboBox1.getSelectedItem()));
-        
-        ArrayList<Hospital> hospitalDetails = hospitalDirectory.getHospitalsInCommunity(communityId);
-        
-        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-        model.setRowCount(0);
-       
-       if(hospitalDetails != null){
-        for(Hospital hospital : hospitalDetails) {
-            
-        Object[] newRow = new Object[3];
-           newRow[0] = hospital.getHospitalId();
-           newRow[1] = hospital;
-           newRow[2] = hospital.getAddress();
-           
-           model.addRow(newRow);
-       }
-       }
+
+        if (jComboBox1.getSelectedItem() != null) {
+            int communityId = Integer.parseInt(String.valueOf(jComboBox1.getSelectedItem()));
+
+            ArrayList<Hospital> hospitalDetails = hospitalDirectory.getHospitalsInCommunity(communityId);
+
+            if (hospitalDetails.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "No Hospitals under the selected Community");
+            } else {
+                DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+                model.setRowCount(0);
+                for (Hospital hospital : hospitalDetails) {
+
+                    Object[] newRow = new Object[3];
+                    newRow[0] = hospital.getHospitalId();
+                    newRow[1] = hospital;
+                    newRow[2] = hospital.getAddress();
+
+                    model.addRow(newRow);
+                }
+
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Choose a valid Community ID");
+        }
     }
 }

@@ -51,4 +51,14 @@ public class CityDirectory {
         
         cityList.set(position, newCity);
     }
+    
+    public String cityIdValidation (City city) {
+        for(int i=0; i<cityList.size(); i++) {
+            if(city.getCityId() == cityList.get(i).getCityId()) {
+                return ("Please enter a unique City ID");
+            }
+        }
+        
+        return ("Valid");
+    }
 }
