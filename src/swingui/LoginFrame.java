@@ -60,11 +60,20 @@ public class LoginFrame extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(102, 102, 102));
+        jPanel1.setBackground(new java.awt.Color(0, 204, 204));
 
+        jButton1.setFont(new java.awt.Font("Comic Sans MS", 0, 16)); // NOI18N
         jButton1.setText("System Admin");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -72,6 +81,7 @@ public class LoginFrame extends javax.swing.JFrame {
             }
         });
 
+        jButton2.setFont(new java.awt.Font("Comic Sans MS", 0, 16)); // NOI18N
         jButton2.setText("Doctor");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -79,6 +89,7 @@ public class LoginFrame extends javax.swing.JFrame {
             }
         });
 
+        jButton3.setFont(new java.awt.Font("Comic Sans MS", 0, 16)); // NOI18N
         jButton3.setText("Patient");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -86,6 +97,7 @@ public class LoginFrame extends javax.swing.JFrame {
             }
         });
 
+        jButton4.setFont(new java.awt.Font("Comic Sans MS", 0, 16)); // NOI18N
         jButton4.setText("Hospital Admin");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -93,6 +105,7 @@ public class LoginFrame extends javax.swing.JFrame {
             }
         });
 
+        jButton5.setFont(new java.awt.Font("Comic Sans MS", 0, 16)); // NOI18N
         jButton5.setText("Community Admin");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -108,7 +121,7 @@ public class LoginFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 19, Short.MAX_VALUE)
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -135,20 +148,77 @@ public class LoginFrame extends javax.swing.JFrame {
                 .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(154, Short.MAX_VALUE))
+                .addContainerGap(169, Short.MAX_VALUE))
         );
 
         jSplitPane1.setLeftComponent(jPanel1);
+
+        jPanel2.setBackground(new java.awt.Color(153, 255, 204));
+
+        jLabel1.setFont(new java.awt.Font("Comic Sans MS", 0, 36)); // NOI18N
+        jLabel1.setText("Welcome to Hospital Database");
+
+        jLabel2.setFont(new java.awt.Font("Comic Sans MS", 0, 18)); // NOI18N
+        jLabel2.setText("Choose a User Role to begin.");
+
+        jLabel3.setFont(new java.awt.Font("Comic Sans MS", 0, 18)); // NOI18N
+        jLabel3.setText("New Patients can register themselves by creating a profile.");
+
+        jLabel4.setFont(new java.awt.Font("Comic Sans MS", 0, 18)); // NOI18N
+        jLabel4.setText("Existing Patients can search for doctors under the hospitals present under their community and book an appointment.");
+
+        jLabel5.setFont(new java.awt.Font("Comic Sans MS", 0, 18)); // NOI18N
+        jLabel5.setText("Doctors can enter VitalSigns report for a particular patient.");
+
+        jLabel6.setFont(new java.awt.Font("Comic Sans MS", 0, 18)); // NOI18N
+        jLabel6.setText("HospitalAdmins can manage the doctors under a given hospital.");
+
+        jLabel7.setFont(new java.awt.Font("Comic Sans MS", 0, 18)); // NOI18N
+        jLabel7.setText("CommunityAdmins can manage the hospitals under a given community.");
+
+        jLabel8.setFont(new java.awt.Font("Comic Sans MS", 0, 18)); // NOI18N
+        jLabel8.setText("SystemAdmins can perform CRUD on all the roles in the application.");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 894, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(41, 41, 41)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 522, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(144, 144, 144))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel4)
+                        .addComponent(jLabel3)
+                        .addComponent(jLabel2)
+                        .addComponent(jLabel5)
+                        .addComponent(jLabel6)
+                        .addComponent(jLabel7)
+                        .addComponent(jLabel8)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 800, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(67, 67, 67)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(49, 49, 49)
+                .addComponent(jLabel2)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel3)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel4)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel5)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel6)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel7)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel8)
+                .addContainerGap(321, Short.MAX_VALUE))
         );
 
         jSplitPane1.setRightComponent(jPanel2);
@@ -233,6 +303,14 @@ public class LoginFrame extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JSplitPane jSplitPane1;

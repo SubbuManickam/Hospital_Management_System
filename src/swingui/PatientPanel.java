@@ -51,8 +51,9 @@ public class PatientPanel extends javax.swing.JPanel {
         jButton3 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
 
-        jPanel1.setBackground(new java.awt.Color(102, 102, 102));
+        jPanel1.setBackground(new java.awt.Color(0, 153, 153));
 
+        jButton1.setFont(new java.awt.Font("Comic Sans MS", 0, 16)); // NOI18N
         jButton1.setText("New User");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -60,6 +61,7 @@ public class PatientPanel extends javax.swing.JPanel {
             }
         });
 
+        jButton2.setFont(new java.awt.Font("Comic Sans MS", 0, 16)); // NOI18N
         jButton2.setText("Existing User");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -67,6 +69,7 @@ public class PatientPanel extends javax.swing.JPanel {
             }
         });
 
+        jButton3.setFont(new java.awt.Font("Comic Sans MS", 0, 16)); // NOI18N
         jButton3.setText("Encounter History");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -84,21 +87,23 @@ public class PatientPanel extends javax.swing.JPanel {
                     .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap(7, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(189, 189, 189)
+                .addGap(223, 223, 223)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(47, 47, 47)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(46, 46, 46)
                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(341, Short.MAX_VALUE))
+                .addContainerGap(307, Short.MAX_VALUE))
         );
 
         jSplitPane1.setLeftComponent(jPanel1);
+
+        jPanel2.setBackground(new java.awt.Color(153, 255, 204));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);

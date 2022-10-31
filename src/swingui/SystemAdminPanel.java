@@ -165,8 +165,14 @@ public class SystemAdminPanel extends javax.swing.JPanel {
         jTable5 = new javax.swing.JTable();
         jButton17 = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(153, 255, 204));
+
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel1.setText("System Admin");
+
+        jTabbedPane1.setBackground(new java.awt.Color(153, 255, 204));
+
+        jPanel1.setBackground(new java.awt.Color(153, 255, 204));
 
         jLabel2.setText("City ID:");
 
@@ -307,6 +313,8 @@ public class SystemAdminPanel extends javax.swing.JPanel {
 
     jTabbedPane1.addTab("City", jPanel1);
 
+    jPanel2.setBackground(new java.awt.Color(153, 255, 204));
+
     jButton5.setText("Create");
     jButton5.addActionListener(new java.awt.event.ActionListener() {
         public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -445,6 +453,8 @@ public class SystemAdminPanel extends javax.swing.JPanel {
     );
 
     jTabbedPane1.addTab("Community", jPanel2);
+
+    jPanel3.setBackground(new java.awt.Color(153, 255, 204));
 
     jLabel15.setText("Hospital Name:");
 
@@ -604,6 +614,8 @@ public class SystemAdminPanel extends javax.swing.JPanel {
     );
 
     jTabbedPane1.addTab("Hospital", jPanel3);
+
+    jPanel4.setBackground(new java.awt.Color(153, 255, 204));
 
     jLabel22.setText("Doctor Name:");
 
@@ -780,6 +792,8 @@ public class SystemAdminPanel extends javax.swing.JPanel {
     );
 
     jTabbedPane1.addTab("Doctor", jPanel4);
+
+    jPanel5.setBackground(new java.awt.Color(153, 255, 204));
 
     jTable5.setModel(new javax.swing.table.DefaultTableModel(
         new Object [][] {

@@ -79,6 +79,8 @@ public class HospitalAdminPanel extends javax.swing.JPanel {
         jLabel8 = new javax.swing.JLabel();
         jTextField7 = new javax.swing.JTextField();
 
+        setBackground(new java.awt.Color(153, 255, 204));
+
         jButton4.setText("Delete");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

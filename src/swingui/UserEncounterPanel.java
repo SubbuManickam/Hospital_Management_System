@@ -44,6 +44,8 @@ public class UserEncounterPanel extends javax.swing.JPanel {
         jTable1 = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(153, 255, 204));
+
         jLabel1.setText("Enter unique User ID:");
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(

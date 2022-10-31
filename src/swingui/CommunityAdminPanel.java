@@ -74,6 +74,8 @@ public class CommunityAdminPanel extends javax.swing.JPanel {
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(153, 255, 204));
+
         jLabel1.setText("Choose a Community ID:");
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(

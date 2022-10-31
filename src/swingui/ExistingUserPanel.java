@@ -79,6 +79,8 @@ public class ExistingUserPanel extends javax.swing.JPanel {
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(153, 255, 204));
+
         jLabel1.setText("Enter unique User ID:");
 
         jButton1.setText("View");
